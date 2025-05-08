@@ -1,50 +1,46 @@
 # CommandRunner
 
-A flexible Java module for running external binaries, scripts, or shell commands on Linux systems. Built with a clear, SOLID design, it enables robust command execution with full control over arguments, working directories, and environment variables.
+This CommandRunner module is designed to run external commands, scripts, or binary files, and is ideal for use in monitoring systems. It allows you to execute commands to check system status, resource usage, and service health, while managing the output efficiently.
 
 ---
 
 ## Features
 
-- **Execute any external command or script**
+- **Execute system diagnostics commands like top, df, ps, etc.**
 - **Pass arguments dynamically**
 - **Define the working directory for execution**
-- **Inject additional environment variables**
-- **Capture and handle standard output and error streams separately**
-- **Follows SOLID principles** (single responsibility, open/closed, interface segregation, etc.)
+- **Handle standard output and error separately for logging.**
+- **Alerting mechanism for failures (e.g., service down).**
+- **Integration with alerting systems like email, Slack, or webhook.**
 
 ---
 
 ## Example Usage
 
-### Running a Command with Arguments
+### Example Usage for Monitoring System Health:
 
 ```java
 CommandConfig config = new CommandConfig(
-  ./runFile, // Path to executable or script
-  List.of("arg1", "arg2", "arg3"), // Arguments
-  new File("/mnt/scripts"), // Working directory
-
-  Map.of( // (Optional) environment variables
-    "LD_LIBRARY_PATH", "/path/to/lib",
-    "DB2_CLI_DRIVER_INSTALL_PATH", "/path/to/second/lib"
-)
+    "/usr/bin/top",                             // Path to executable
+    List.of("-n", "1"),                         // Arguments
+    new File("/mnt/scripts"),                   // Working directory
+    null                                        // No additional environment variables
 );
 
-OutputHandler handler = new DefaultOutputHandler(); // Handles stdout and stderr
+OutputHandler handler = new DefaultOutputHandler();
 ExternalCommandRunner runner = new DefaultCommandRunner(handler);
 
 runner.runCommand(config);
 ```
 ---
 
-### Running a Command Without Arguments
+### Monitor Service Status:
 ```java
 CommandConfig config = new CommandConfig(
-  ./runFile,
-  List.of(),
-  new File("/mnt/scripts"),
-  null // No extra environment variables
+    "/usr/bin/systemctl",                       // Check the status of a service
+    List.of("is-active", "apache2"),            // Arguments to check Apache status
+    new File("/mnt/scripts"),
+    null
 );
 
 runner.runCommand(config);
