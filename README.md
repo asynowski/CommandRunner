@@ -2,7 +2,8 @@
 
 This CommandRunner module is designed to run external commands, scripts, or binary files, and is ideal for use in monitoring systems. It allows you to execute commands to check system status, resource usage, and service health, while managing the output efficiently.
 
----
+
+
 
 ## Features
 
@@ -13,7 +14,8 @@ This CommandRunner module is designed to run external commands, scripts, or bina
 - **Alerting mechanism for failures (e.g., service down).**
 - **Integration with alerting systems like email, Slack, or webhook.**
 
----
+
+
 
 ## Example Usage
 
@@ -32,7 +34,8 @@ ExternalCommandRunner runner = new DefaultCommandRunner(handler);
 
 runner.runCommand(config);
 ```
----
+
+
 
 ### Monitor Service Status:
 ```java
@@ -46,7 +49,8 @@ CommandConfig config = new CommandConfig(
 runner.runCommand(config);
 ```
 
----
+
+
 
 ### Capturing Command Output
 
@@ -57,7 +61,8 @@ String output = runner.runCommandAndCaptureOutput(config);
 System.out.println("Command output:\n" + output);
 ```
 
----
+
+
 
 ## Class Overview
 
@@ -69,14 +74,16 @@ System.out.println("Command output:\n" + output);
 | `OutputHandler`           | Interface for handling process output.                                   |
 | `DefaultOutputHandler`    | Prints output/error streams to `System.out`/`System.err`.                |
 
----
+
+
 
 ## Requirements
 
 - **Java 11 or newer**
 - **Linux system** (or compatible Unix environment)
 
----
+
+
 
 ## Notes
 
