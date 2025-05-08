@@ -88,6 +88,12 @@ System.out.println("Command output:\n" + output);
 ## Notes
 
 - Ensure your executable or script has execute permissions:
+  ```bash
+  chmod +x your_script.sh
+  ```
+- Always test commands carefully, especially when providing user-supplied input.
+
+- For advanced use cases, you can implement your own OutputHandler to redirect output to a log file, database, or custom logger.
 
 
 
